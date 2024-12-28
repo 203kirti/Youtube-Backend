@@ -7,6 +7,8 @@ class ApiResponse{
     }
 }
 
+export { ApiResponse }
+
 //  The ApiResponse class created is a utility to standardize responses from  backend API. It encapsulates essential details such as status code, data, message, and success status. 
 
 //  statusCode: Indicates the HTTP status code of the response (e.g., 200 for success, 404 for not found, etc.).

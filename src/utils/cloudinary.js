@@ -1,7 +1,7 @@
 // file upload 
 // fs file system node k sath aata hai to manage file system , read , write, edit files
 import {v2 as cloudinary} from "cloudinary";
-import fs from fs;
+import fs from "fs";
 
 //configuration which gives the file upload load permission
 cloudinary.config({ 
@@ -20,8 +20,9 @@ const uploadOnCloudinary = async (localFilePath) => {
             resource_type:"auto" 
         })
         // file has been uploaded successfully
-        console.log("file is uploaded on cloudinary", response.url);
-        return response
+        //console.log("file is uploaded on cloudinary", response.url);
+        fs.unlinkSync(localFilePath)
+        return response;
 
     }catch(error){
         fs.unlinkSync(localFilePath) // remove the locally saved temporary file as the upload operations gets fail's  

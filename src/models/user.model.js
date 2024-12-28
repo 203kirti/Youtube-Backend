@@ -31,12 +31,12 @@ const userSchema = new Schema(
         coverImage:{
             type:String,  // cloudinary true
         },
-        watchHistory: [
-            {
-                type:Schema.Types.ObjectId,
-                ref:Vedio
-            }
-        ],
+        // watchHistory: [
+        //     {
+        //         type:Schema.Types.ObjectId,
+        //         ref:Vedio
+        //     }
+        // ],
         password: {
             type:String,
             required:[true,'password is required']
@@ -55,7 +55,7 @@ userSchema.pre("save" , async function (next) {
     // not to encrypt password everytime , only when entered first time and when password is updated otherwise go to next
     if(!this.isModified("password")) return next
 
-    this.password = bcrypt.hash(this.password, 10)
+    this.password = await bcrypt.hash(this.password, 10)
     next()
 })
 
