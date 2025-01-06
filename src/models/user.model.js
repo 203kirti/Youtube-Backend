@@ -31,12 +31,12 @@ const userSchema = new Schema(
         coverImage:{
             type:String,  // cloudinary true
         },
-        // watchHistory: [
-        //     {
-        //         type:Schema.Types.ObjectId,
-        //         ref:Vedio
-        //     }
-        // ],
+        watchHistory: [
+            {
+                type:Schema.Types.ObjectId,
+                ref: "Vedio"
+            }
+        ],
         password: {
             type:String,
             required:[true,'password is required']
@@ -66,6 +66,8 @@ userSchema.methods.isPasswordCorrect = async function(password){
    return await bcrypt.compare(password , this.password)
 }
 
+// access token -- short lived
+
 userSchema.methods.generateAccessToken=function(){
     return jwt.sign(
         {
@@ -79,6 +81,8 @@ userSchema.methods.generateAccessToken=function(){
         }
     )
 }
+
+// refresh token -- long lived
 
 userSchema.methods.generateRefreshToken = function(){
     return jwt.sign(
